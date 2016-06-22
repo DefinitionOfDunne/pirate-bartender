@@ -15,11 +15,9 @@ var strongItems = new Ingredient(["whiskey", " rum", " vodka"], "strong"),
     fruityItems = new Ingredient(["splasha apple juice", " splasha orange juice", " cherry"], "fruity");
 
 
-
-
-
+/* PRINT QUESTION AND CREATE USER INPUT FIELDS */
 appendQuestions('<li class="prefs">' + strength.text + '<input type="checkbox" id="box1">' + '</li>');
-    appendQuestions('<li class="prefs">' + saltiness.text + '<input type="checkbox" id="box2">' + '</li>');
+appendQuestions('<li class="prefs">' + saltiness.text + '<input type="checkbox" id="box2">' + '</li>');
 appendQuestions('<li class="prefs">' + bitterness.text + '<input type="checkbox" id="box3">' + '</li>');
 appendQuestions('<li class="prefs">' + sweetness.text + '<input type="checkbox" id="box4">' + '</li>');
 appendQuestions('<li class="prefs">' + fruity.text + '<input type="checkbox" id="box5">' + '</li>');
@@ -33,8 +31,8 @@ var firstPref = new Preferences(box1, strongItems.randomize()),
     fifthPref = new Preferences(box5, fruityItems.randomize());
 
 
-
 Preferences.prototype.getChoices();
+
 
 $('#ingredients-revealer').on('click', function() {
     strongItems.showMenu();
@@ -43,6 +41,9 @@ $('#ingredients-revealer').on('click', function() {
     sugaryItems.showMenu();
     fruityItems.showMenu();
 })
+
+
+/* APPEND FUNCTIONS FOR CLEANER CODE*/
 
 function appendQuestions(item) {
     $(".drink-order").append(item);
