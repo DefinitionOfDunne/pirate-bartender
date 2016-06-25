@@ -2,33 +2,46 @@
 <html>
 
 <head>
-    <title> </title>
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Pirate Bartender</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile.css">
 </head>
 
 <body>
-    <div class='container'>
-        <h1>Pirate Bartender</h1>
-        <p class="instructions">"Hi!
-            <br> If you're not 21, I'll gut ye like a fuckin' fish mate!
-            <br> Hehehe!
-            <br> Check off your preferences and I'll make your drink!"</p>
-        <img class='pirate-lady' src="images/pirate-girl.jpg"></img>
-        <div class="info-container">
-            <ul class="drink-order">
-            </ul>
+    <div class="wrapper">
+        <h1>PIRATE BARTENDER</h1>
+        <div class="left">
+            <div class="radio-group">
+                <ul class="drink-order"></ul>
+            </div>
+            <!-- radio-group-->
+            <div class="button-group">
+                <h1>Dealer's Choice Ya Sea Dog</h1>
+                <button id="create-drink">Place your order</button>
+            </div>
         </div>
-        <div class='drink-container'>
-            <h2 id="creation-header">Dealer's Choice Ya Sea Dog!!</h2>
-            <button id="create-drink">Place Your Order</button>
-            <h2 id="ingredients-header"> Trust Issue Matey? Create Yer Own! </h2>
-            <button id="ingredients-revealer">See All Ingredients</button>
-            <p class="userCreation"></p>
-            <p class="customCreation"></p>
+        <div class="right">
+            <p>
+                "If You're Not 21, I'll Gut Ye Like A Fuckin' Fish Matey <br> Hehehe <br> Check Off Your Preferences And I'll Make Your Drink"
+            </p>
+                <img class='pirate-lady' src="images/pirate-girl.jpg"></img>
+            <div class="button-group">
+                <h1>See Yer Choices Matey</h1>
+                <button id="ingredients-revealer">See All Ingredients</button>
+            </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script type="text/javascript" src='js/constructors.js'></script>
-        <script type="text/javascript" src="js/app.js"></script>
+        <div class="left">
+            <ul class="userCreation"></ul>
+        </div>
+        <div class="right">
+            <ul class="customCreation"></ul>
+        </div>
+    </div>
+    <!-- wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
