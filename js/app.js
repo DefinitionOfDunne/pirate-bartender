@@ -1,58 +1,90 @@
 'use strict'
 
-//QUESTION OBJECTS
 var strength = new Question("Do ye like yer drinks strong?"),
     saltiness = new Question("Do ye like it with a salty tang?"),
     bitterness = new Question("Are ye a lubber who likes it bitter?"),
-    sweetness = new Question("Would ye like a bit of sweetness with yer poison?"),
+    sweetness = new Question("Would ye like a bit of sweetness?"),
     fruity = new Question("Are ye one for a fruity finish?");
 
-//INGREDIENT OBJECTS
-var strongItems = new Ingredient(["whiskey", " rum", " vodka"], "strong"),
-    saltyItems = new Ingredient(["bacon crumbles", " sea salt", " cocktail olives"], "salty"),
-    bitterItems = new Ingredient(["lemon twist", " squeeza lime", " splasha tonic"], "bitter"),
-    sugaryItems = new Ingredient(["sugar cube", " splasha cola", " honey"], "sweet"),
-    fruityItems = new Ingredient(["splasha apple juice", " splasha orange juice", " cherry"], "fruity");
+var strongItems = new Ingredient(["whiskey", "rum", "vodka"], "strong"),
+    saltyItems = new Ingredient(["bacon crumbles", "sea salt", "cocktail olives"], "salty"),
+    bitterItems = new Ingredient(["lemon twist", "squeeza lime", "splasha tonic"], "bitter"),
+    sugaryItems = new Ingredient(["sugar cube", "splasha cola", "honey"], "sweet"),
+    fruityItems = new Ingredient(["splasha apple juice", "splasha orange juice", "cherry"], "fruity");
+
+var preferences = {};
+
+var dylan = new Bartender();
+
+initUI();
+initMenu();
+function Bartender() {
+    this.drink = [];
+}
+
+Bartender.prototype.createDrink = function(preferences) {
+
+    var selections = [strongItems.items, saltyItems.items, bitterItems.items, sugaryItems.items, fruityItems.items];
+    var preferencesList = ['strong', 'salty', 'bitter', 'sugary', 'fruity'];
+
+    for (var i = 0; i < selections.length; i++) {
+        if (preferences[preferencesList[i]]) {
+            this.drink.push('<li class="drinkList">' + selections[i][Math.floor(Math.random() * 3)] + '</li>');
+        }
+    }
+
+    $('.userCreation').prepend(this.drink.join(' '));
+    this.drink = [];
+};
 
 
-/* PRINT QUESTION AND CREATE USER INPUT FIELDS */
-appendQuestions('<li class="prefs">' + strength.text + '<input type="checkbox" id="box1">' + '</li>');
-appendQuestions('<li class="prefs">' + saltiness.text + '<input type="checkbox" id="box2">' + '</li>');
-appendQuestions('<li class="prefs">' + bitterness.text + '<input type="checkbox" id="box3">' + '</li>');
-appendQuestions('<li class="prefs">' + sweetness.text + '<input type="checkbox" id="box4">' + '</li>');
-appendQuestions('<li class="prefs">' + fruity.text + '<input type="checkbox" id="box5">' + '</li>');
+function initUI() {
+    var questions = [strength.text, saltiness.text, bitterness.text, sweetness.text, fruity.text];
+
+    for (var i = 0; i < questions.length; i++) {
+        $('.drink-order').append('<li class="prefs">' + questions[i] + '<input type="checkbox" id="box' + (i + 1) + '"></li>');
+
+    }
+}
+function initMenu() {
+    $('.customCreation').hide();
+    var items = [strongItems.items, saltyItems.items, bitterItems.items, sugaryItems.items, fruityItems.items];
+    var type = ['strong', 'salty', 'bitter', 'sugary', 'fruity'];
+
+    for (var i = 0; i < items.length; i++) {
+        $('.customCreation').append('<li>' + type[i] + " options: <span>" + items[i].join(', ') + '</span> </li>');
+    }
+}
+function Question(text) {
+    this.text = text;
+}
+
+function Ingredient(items, category) {
+    this.items = items;
+    this.category = category;
+}
 
 
-//PREFERENCES OBJECTS
-var firstPref = new Preferences(box1, strongItems.randomize()),
-    secondPref = new Preferences(box2, saltyItems.randomize()),
-    thirdPref = new Preferences(box3, bitterItems.randomize()),
-    fourthPref = new Preferences(box4, sugaryItems.randomize()),
-    fifthPref = new Preferences(box5, fruityItems.randomize());
+$('#create-drink').click(function() {
+    $('.drinkList').remove();
+    var boxes = ['#box1', '#box2', '#box3', '#box4', '#box5'],
+        preferencesList = ['strong', 'salty', 'bitter', 'sugary', 'fruity'];
 
+    for (var i = 0; i < boxes.length; i++) {
 
-Preferences.prototype.getChoices();
+        if ($(boxes[i]).prop('checked')) {
+            preferences[preferencesList[i]] = true;
+        }
+    }
 
+    dylan.createDrink(preferences);
+        for (var i = 0; i < boxes.length; i++) {
+            ($(boxes[i]).prop('checked', false))
+            preferences[preferencesList[i]] = false;
+        }
+      
+});
 
-$('#ingredients-revealer').on('click', function() {
-    strongItems.showMenu();
-    saltyItems.showMenu();
-    bitterItems.showMenu();
-    sugaryItems.showMenu();
-    fruityItems.showMenu();
+$('#ingredients-revealer').click(function() {
+    $('.customCreation').toggle();
 })
-
-
-/* APPEND FUNCTIONS FOR CLEANER CODE*/
-
-function appendQuestions(item) {
-    $(".drink-order").append(item);
-}
-
-function appendLeft(item) {
-    $(".userCreation").append('<br>' + item);
-}
-
-function appendRight(item) {
-    $(".customCreation").append('<br>' + item);
-}
