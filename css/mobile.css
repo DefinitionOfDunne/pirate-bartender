@@ -1,0 +1,42 @@
+@import url(https://fonts.googleapis.com/css?family=Coming+Soon);
+@media screen and (max-width:1000px) {
+
+
+body {
+	font-family: 'Coming Soon', cursive;
+	font-size: 100%;
+ 	box-sizing: border-box;
+ 	background-color: white;
+}
+
+.wrapper {
+	width: 530px;
+    margin: 0 auto;
+    border: solid thick #000000;
+    padding: 10px;
+}
+
+
+.left,
+.right {
+    display: block;
+    width: 100%;
+    margin-right: -4px;
+	margin-top: 10px;
+}
+.right p {
+	display: none;
+}
+.right img {
+	position: fixed;
+	z-index: -1;
+	opacity: .25;
+    width: 250px;
+    top: 1.5em;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+}
